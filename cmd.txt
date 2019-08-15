@@ -1,0 +1,41 @@
+C:\Users\student\Desktop>python
+Python 3.7.2 (tags/v3.7.2:9a3ffc0492, Dec 23 2018, 22:20:52) [MSC v.1916 32 bit (Intel)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import openpyxl
+>>> wb = openpyxl.load_workbook('moraa.xlsx')
+>>> wb.get_sheet_names()
+__main__:1: DeprecationWarning: Call to deprecated function get_sheet_names (Use wb.sheetnames).
+['Sheet1', 'Sheet2', 'Sheet3']
+>>> sheet = wb.get_sheet_by_name('Sheet1')
+>>> sheet['A1']
+<Cell 'Sheet1'.A1>
+>>> sheet['A1'].value
+'14/07/2019  12:34:12 PM'
+>>> c = sheet['B1']
+>>> c.value
+'Onions'
+>>> 'Row ' + str(c.row) + ', Column ' + c.column + ' is ' + c.value
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: can only concatenate str (not "int") to str
+>>> 'Row ' + int(c.row) + ', Column ' + c.column + ' is ' + c.value
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: can only concatenate str (not "int") to str
+>>> 'Row ' + str(c.row) + ', Column ' + str(c.column) + ' is ' + c.value
+'Row 1, Column 2 is Onions'
+>>> 'Cell ' + c.coordinate + ' is ' + c.value
+'Cell B1 is Onions'
+>>> sheet['C1'].value
+55
+>>> sheet.cell(row=1, column=2)
+<Cell 'Sheet1'.B1>
+>>> sheet.cell(row=1, column=2).value
+'Onions'
+>>> for i in range(1, 8, 2):
+...         print(i, sheet.cell(row=i, column=2).value)
+...
+1 Onions
+3 Grapes
+5 Oranges
+7 Tomato
